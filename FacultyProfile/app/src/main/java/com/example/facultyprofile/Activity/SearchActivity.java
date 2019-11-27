@@ -1,10 +1,10 @@
-package com.example.facultyprofile;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.facultyprofile.Activity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.facultyprofile.R;
+
+public class SearchActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
