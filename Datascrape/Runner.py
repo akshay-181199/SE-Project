@@ -2,10 +2,11 @@ import scholar
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
+from firebase_admin import firestore
 import re
-cred = credentials.Certificate("Cert")
-firebase_admin.initialize_app(cred, {'databaseURL': 'DatabaseURL'})
-ref = db.reference('/professor/')
+cred = credentials.Certificate("/Users/yogeshm/Documents/comments-324ed-firebase-adminsdk-w4ed5-fba388101e.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 def cleanhtml(raw_html):
   cleanr = re.compile('<.*?>')
@@ -38,7 +39,6 @@ for i in search_query:
     con = {
         'name': i.name,
         'publications': l,
-        'cites_per_year': i.cites_per_year,
         'citedby': i.citedby,
         'hindex': i.hindex,
         'hindex5y': i.hindex5y,
@@ -48,4 +48,5 @@ for i in search_query:
         'url_picture': i.url_picture
         }
     print(con)
-    ref.child(i.name).set(con)
+    doc_ref = db.collection('professors').document(i.name)
+    doc_ref.set(con)
