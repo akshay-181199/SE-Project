@@ -23,7 +23,7 @@ for i in search_query:
         try:
             k = pub.fill()
             c = {
-                'abstract': cleanhtml(str(k.bib['abstract'])),
+                'abstracts': cleanhtml(str(k.bib['abstract'])),
                 'title': k.bib['title'],
                 'url': k.bib['url'],
                 'year': k.bib['year'],

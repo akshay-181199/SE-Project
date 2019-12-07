@@ -1,9 +1,10 @@
 package com.example.facultyprofile.managers;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
+import com.example.facultyprofile.Listeners.OnObjectFetchListener;
+import com.example.facultyprofile.Listeners.OnObjectListFetchListener;
+import com.example.facultyprofile.Models.Professors;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -11,30 +12,39 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 public class databasehelper {
     private FirebaseFirestore db;
     public databasehelper(){
         db = FirebaseFirestore.getInstance();
     }
 
-    public void fetchallprofessors(){
+    public void fetchallprofessors(final OnObjectListFetchListener onObjectListFetchListener){
         db.collection("professors")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("databasehelper", document.getId() + " => " + document.getData());
+                            if (task.getResult()==null){
+                                onObjectListFetchListener.onListChanged(null,true);
+                            }
+                            else {
+                                ArrayList<Professors> list = new ArrayList<>();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    list.add(document.toObject(Professors.class));
+                                }
+                                onObjectListFetchListener.onListChanged(list,false);
                             }
                         } else {
-                            Log.w("databasehelper", "Error getting documents.", task.getException());
+                            onObjectListFetchListener.onListChanged(null,true);
                         }
                     }
                 });
     }
 
-    public void fetchoneprofessors(String name){
+    public void fetchoneprofessors(String name, final OnObjectFetchListener onObjectFetchListener){
         db.collection("professors").document(name)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -42,12 +52,13 @@ public class databasehelper {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("databasehelper", "DocumentSnapshot data: " + document.getData());
+                        Professors professors = document.toObject(Professors.class);
+                        onObjectFetchListener.onDataFetched(professors);
                     } else {
-                        Log.d("databasehelper", "No such document");
+                        onObjectFetchListener.onDataFetched(null);
                     }
                 } else {
-                    Log.d("databasehelper", "get failed with ", task.getException());
+                    onObjectFetchListener.onDataFetched(null);
                 }
             }
         });
