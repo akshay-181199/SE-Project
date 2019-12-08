@@ -63,4 +63,38 @@ public class databasehelper {
             }
         });
     }
+
+    public void fetchoninterest(final String interest, final OnObjectListFetchListener onObjectListFetchListener){
+        db.collection("professors")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult()==null){
+                                onObjectListFetchListener.onListChanged(null,true);
+                            }
+                            else {
+                                ArrayList<Professors> list = new ArrayList<>();
+                                int flag = 0;
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Professors professors = document.toObject(Professors.class);
+                                    if (professors.getInterests().contains(interest)){
+                                        list.add(professors);
+                                        flag = 1;
+                                    }
+                                }
+                                if (flag == 1){
+                                    onObjectListFetchListener.onListChanged(list,false);
+                                }
+                                else {
+                                    onObjectListFetchListener.onListChanged(null,true);
+                                }
+                            }
+                        } else {
+                            onObjectListFetchListener.onListChanged(null,true);
+                        }
+                    }
+                });
+    }
 }
