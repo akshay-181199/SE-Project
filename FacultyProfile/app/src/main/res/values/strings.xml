@@ -3,4 +3,8 @@
     <string name="button_ok">OK</string>
     <string name="internet_connection_failed">No internet connection</string>
     <string name="loading">Loading..</string>
+    <string-array name="course">
+        <item>FACULTY NAME</item>
+        <item>DEPARTMENT</item>
+    </string-array>
 </resources>
