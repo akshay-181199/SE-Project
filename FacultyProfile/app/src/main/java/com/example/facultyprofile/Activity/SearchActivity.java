@@ -43,10 +43,12 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position==0){
+                    dep.setText("");
                     name.setVisibility(View.VISIBLE);
                     dep.setVisibility(View.GONE);
                 }
                 else{
+                    name.setText("");
                     dep.setVisibility(View.VISIBLE);
                     name.setVisibility(View.GONE);
                 }
