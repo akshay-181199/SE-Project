@@ -1,10 +1,11 @@
 package com.example.facultyprofile.Models;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class Publications{
+public class Publications implements Serializable {
 
     private String abstracts;
     private String author;
@@ -32,7 +33,7 @@ public class Publications{
     }
 
     public String getPublisher() {
-        return author;
+        return publisher;
     }
 
     public void setPublisher(String publisher) {
@@ -40,7 +41,7 @@ public class Publications{
     }
 
     public String getTitle() {
-        return author;
+        return title;
     }
 
     public void setTitle(String title) {
@@ -48,7 +49,7 @@ public class Publications{
     }
 
     public String getUrl() {
-        return author;
+        return url;
     }
 
     public void setUrl(String url) {
@@ -56,7 +57,7 @@ public class Publications{
     }
 
     public String getYear() {
-        return author;
+        return year;
     }
 
     public void setYear(String year) {

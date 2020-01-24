@@ -2,9 +2,7 @@ package com.example.facultyprofile.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +24,7 @@ public class ProfessorListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         String str = intent.getStringExtra("flag");
         setContentView(R.layout.professors_show_list);
         professorrecylerview = findViewById(R.id.professorlistRecyclerView);
@@ -35,6 +33,9 @@ public class ProfessorListActivity extends BaseActivity {
             @Override
             public void onItemClick(int position, View view) {
                 Professors professors = Professorlistadapter.getItemByPosition(position);
+                Intent intent1 = new Intent(ProfessorListActivity.this,ProfileActivity.class);
+                intent1.putExtra("Obj", professors);
+                startActivity(intent1);
             }
         });
         professorrecylerview.setAdapter(Professorlistadapter);
@@ -46,10 +47,11 @@ public class ProfessorListActivity extends BaseActivity {
             db.fetchoneprofessors(intent.getStringExtra("name"), new OnObjectFetchListener() {
                 @Override
                 public void onDataFetched(Object object) {
-                    ArrayList<Professors> list=new ArrayList<Professors>();
-                    list.add((Professors) object);
                     hideProgress();
-                    Professorlistadapter.setProfessorsArrayList(list);
+                    Intent intent2 = new Intent(ProfessorListActivity.this,ProfileActivity.class);
+                    intent2.putExtra("Obj", (Professors)object);
+
+                    startActivity(intent2);
                 }
             });
         }

@@ -1,12 +1,13 @@
 package com.example.facultyprofile.Models;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class Professors{
+public class Professors implements Serializable {
 
     private String name;
     private String url_picture;

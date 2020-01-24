@@ -7,4 +7,9 @@
         <item>FACULTY NAME</item>
         <item>DEPARTMENT</item>
     </string-array>
+
+    <string-array name="publication">
+        <item>AREA OF INTEREST</item>
+        <item>PUBLICATIONS</item>
+    </string-array>
 </resources>

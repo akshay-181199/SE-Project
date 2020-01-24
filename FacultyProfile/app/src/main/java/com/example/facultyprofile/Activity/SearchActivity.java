@@ -19,7 +19,6 @@ public class SearchActivity extends BaseActivity {
     EditText univ,stream,dep,name;
     Spinner s1;
     Button but;
-    String[] strings = {"FACULTY NAME","DEPARTMENT"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,21 +61,28 @@ public class SearchActivity extends BaseActivity {
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name.getText().toString().matches("")&&dep.getText().toString().matches("")){
-                    Toast.makeText(SearchActivity.this,"Please Enter Some Value",Toast.LENGTH_LONG).show();
-                }
-                else if(dep.getText().toString().matches("")){
-                     Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
-                     intent.putExtra("flag","0");
-                     intent.putExtra("name",name.getText().toString());
-                    startActivity(intent);
+                if(hasInternetConnection()){
+                    if(name.getText().toString().matches("")&&dep.getText().toString().matches("")){
+                        Toast.makeText(SearchActivity.this,"Please Enter Some Value",Toast.LENGTH_LONG).show();
+                    }
+                    else if(dep.getText().toString().matches("")){
+                        Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
+                        intent.putExtra("flag","0");
+                        intent.putExtra("name",name.getText().toString());
+                        startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
+                        intent.putExtra("flag","1");
+                        intent.putExtra("dep",dep.getText());
+                        startActivity(intent);
+                    }
                 }
                 else{
-                    Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
-                    intent.putExtra("flag","1");
-                    intent.putExtra("dep",dep.getText());
-                    startActivity(intent);
+                    Toast.makeText(SearchActivity.this,"No Internet!!!",Toast.LENGTH_LONG).show();
+
                 }
+
             }
         });
 

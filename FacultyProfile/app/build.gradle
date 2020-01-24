@@ -39,4 +39,3 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.1.0'
 }
 apply plugin: 'com.google.gms.google-services'
-
