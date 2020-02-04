@@ -27,9 +27,9 @@ import com.google.android.material.snackbar.Snackbar;
 public class BaseActivity extends AppCompatActivity {
 
     protected static final String TAG = BaseActivity.class.getSimpleName();
-    public ProgressDialog progressDialog;
-    public ActionBar actionBar;
-    public Dialog progressBarDialog;
+    private ProgressDialog progressDialog;
+    private ActionBar actionBar;
+    private Dialog progressBarDialog;
 
 
 
