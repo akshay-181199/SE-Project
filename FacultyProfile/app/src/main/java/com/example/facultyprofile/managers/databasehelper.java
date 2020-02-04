@@ -1,5 +1,7 @@
 package com.example.facultyprofile.managers;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.facultyprofile.Listeners.OnObjectFetchListener;

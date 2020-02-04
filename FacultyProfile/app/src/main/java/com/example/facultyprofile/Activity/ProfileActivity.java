@@ -112,4 +112,11 @@ public class ProfileActivity extends BaseActivity {
         i10index.setText(Integer.toString(professors.getI10index()));
         cites.setText(Integer.toString(professors.getCitedby()));
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ProfileActivity.this,SearchActivity.class);
+        startActivity(intent);
+    }
+
 }

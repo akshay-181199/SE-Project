@@ -26,7 +26,6 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <!-- Name Label -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +40,6 @@
                 android:textColorHint="@color/blackColor"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Address Label -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,8 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/FACULTYNAME"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/FACULTYNAME1">
+                <AutoCompleteTextView android:id="@+id/FACULTYNAME"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -74,17 +73,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText android:id="@+id/DEPARTMENT"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/DEPARTMENT1">
+                <AutoCompleteTextView android:id="@+id/DEPARTMENT"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
+                    android:focusableInTouchMode="false"
                     android:hint="DEPARTMENT " />
             </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
 
 
-        <!--  Email Label -->
 
 
         <Spinner
@@ -94,7 +94,6 @@
             android:layout_height="wrap_content" />
 
 
-        <!-- Signup Button -->
 
         <Button android:id="@+id/search"
             android:layout_width="fill_parent"

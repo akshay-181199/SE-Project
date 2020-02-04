@@ -73,4 +73,10 @@ public class ProfessorListActivity extends BaseActivity {
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ProfessorListActivity.this,SearchActivity.class);
+        startActivity(intent);
+    }
 }

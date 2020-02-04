@@ -13,40 +13,44 @@ def cleanhtml(raw_html):
   cleantext = re.sub(cleanr, '', raw_html)
   return cleantext
 
+lis=[]
 
-search_query = scholar.search_author('Ganesh Neelakanta Iyer')
-for i in search_query:
-    i=i.fill()
-    print(i)
-    l=[]
-    for pub in i.publications:
-        try:
-            k = pub.fill()
-            c = {
-                'abstracts': cleanhtml(str(k.bib['abstract'])),
-                'title': k.bib['title'],
-                'url': k.bib['url'],
-                'year': k.bib['year'],
-                'author': k.bib['author'],
-                'citedby': k.citedby,
-                'publisher': k.bib['publisher']
+for j in lis:
+    print("Starting... "+j)
+    search_query = scholar.search_author(j+' @cb.amrita.edu')
+    for i in search_query:
+        i=i.fill()
+        print(i)
+        l=[]
+        for pub in i.publications:
+            try:
+                k = pub.fill()
+                c = {
+                    'abstracts': cleanhtml(str(k.bib['abstract'])),
+                    'title': k.bib['title'],
+                    'url': k.bib['url'],
+                    'year': k.bib['year'],
+                    'author': k.bib['author'],
+                    'citedby': k.citedby,
+                    'publisher': k.bib['publisher']
+                }
+                print(c)
+                l.append(c)
+            except Exception:
+                continue
+
+        con = {
+            'name': i.name,
+            'publications': l,
+            'citedby': i.citedby,
+            'hindex': i.hindex,
+            'hindex5y': i.hindex5y,
+            'i10index': i.i10index,
+            'i10index5y':i.hindex5y,
+            'interests':i.interests,
+            'url_picture': i.url_picture
             }
-            print(c)
-            l.append(c)
-        except Exception:
-            continue
-
-    con = {
-        'name': i.name,
-        'publications': l,
-        'citedby': i.citedby,
-        'hindex': i.hindex,
-        'hindex5y': i.hindex5y,
-        'i10index': i.i10index,
-        'i10index5y':i.hindex5y,
-        'interests':i.interests,
-        'url_picture': i.url_picture
-        }
-    print(con)
-    doc_ref = db.collection('professors').document(i.name)
-    doc_ref.set(con)
+        print(con)
+        doc_ref = db.collection('professors').document(i.name)
+        doc_ref.set(con)
+        print("Endind... "+j)
