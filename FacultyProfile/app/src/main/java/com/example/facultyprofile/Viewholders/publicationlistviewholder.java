@@ -1,7 +1,6 @@
 package com.example.facultyprofile.Viewholders;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
