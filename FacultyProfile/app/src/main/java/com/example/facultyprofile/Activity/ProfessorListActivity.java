@@ -55,13 +55,31 @@ public class ProfessorListActivity extends BaseActivity {
                 }
             });
         }
+        else if(str.equals("2")){
+            db.fetchoninterest(intent.getStringExtra("interest"), new OnObjectListFetchListener() {
+                @Override
+                public void onListChanged(ArrayList list, boolean isEmpty) {
+                    if (isEmpty){
+                        hideProgress();
+                        Intent i = new Intent(ProfessorListActivity.this,SearchActivity.class);
+                        startActivity(i);
+                    }
+                    else {
+                        hideProgress();
+                        Professorlistadapter.setProfessorsArrayList(list);
+
+                    }
+                }
+            });
+        }
         else{
             db.fetchallprofessors(new OnObjectListFetchListener() {
                 @Override
                 public void onListChanged(ArrayList list, boolean isEmpty) {
                     if (isEmpty){
                         hideProgress();
-                        setContentView(R.layout.activity_main);
+                        Intent i = new Intent(ProfessorListActivity.this,SearchActivity.class);
+                        startActivity(i);
                     }
                     else {
                         hideProgress();

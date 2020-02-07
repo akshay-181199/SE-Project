@@ -82,6 +82,20 @@
                     android:focusableInTouchMode="false"
                     android:hint="DEPARTMENT " />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/INTEREST1">
+                <AutoCompleteTextView android:id="@+id/INTEREST"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:focusableInTouchMode="false"
+                    android:hint="INTEREST " />
+            </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
 
 

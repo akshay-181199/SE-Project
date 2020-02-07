@@ -6,6 +6,7 @@
     <string-array name="course">
         <item>FACULTY NAME</item>
         <item>DEPARTMENT</item>
+        <item>INTERESTS</item>
     </string-array>
 
     <string-array name="publication">
