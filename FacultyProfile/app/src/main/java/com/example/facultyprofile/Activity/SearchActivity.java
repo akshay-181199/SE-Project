@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.facultyprofile.R;
 import com.google.firebase.FirebaseApp;
 
+import java.util.Arrays;
 
 
 public class SearchActivity extends BaseActivity {
@@ -118,16 +119,28 @@ public class SearchActivity extends BaseActivity {
                         Toast.makeText(SearchActivity.this,"Please Enter Some Value",Toast.LENGTH_LONG).show();
                     }
                     else if(dep.getText().toString().matches("")&&interest.getText().toString().matches("")){
+                        if(Arrays.asList(names).contains(name.getText().toString())){
                         Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
                         intent.putExtra("flag","0");
                         intent.putExtra("name",name.getText().toString());
-                        startActivity(intent);
+                        startActivity(intent);}
+                        else{
+                            name.setText("");
+                            Toast.makeText(SearchActivity.this,"Enter a valid value!!!",Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else if(name.getText().toString().matches("")&&dep.getText().toString().matches("")){
-                        Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
-                        intent.putExtra("flag","2");
-                        intent.putExtra("interest",interest.getText().toString());
-                        startActivity(intent);
+                        if(Arrays.asList(interests).contains(interest.getText().toString())){
+                            Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
+                            intent.putExtra("flag","2");
+                            intent.putExtra("interest",interest.getText().toString());
+                            startActivity(intent);
+                        }
+                        else{
+                            interest.setText("");
+                            Toast.makeText(SearchActivity.this,"Enter a valid value!!!",Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     else{
                         Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
