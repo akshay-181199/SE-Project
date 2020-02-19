@@ -47,5 +47,8 @@ apply plugin: 'com.google.gms.google-services'
 androidAnalyzer {
     applicationId = 'com.example.facultyprofile'
     projectName = 'Faculty Profile'
-    projectVersion = '1.0.0'
+    projectVersion = '1.0.1'
+    unitTestCoverage = true
+    packageName = 'com.example.facultyprofile'
+    buildVariant = 'debug'
 }

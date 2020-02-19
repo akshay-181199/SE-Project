@@ -42,6 +42,21 @@ public class ProfessorListActivity extends BaseActivity {
         layoutManager=new LinearLayoutManager(ProfessorListActivity.this);
         professorrecylerview.setHasFixedSize(true);
         professorrecylerview.setLayoutManager(layoutManager);
+
+        OnObjectListFetchListener ob = new OnObjectListFetchListener() {
+            @Override
+            public void onListChanged(ArrayList list, boolean isEmpty) {
+                if (isEmpty){
+                    hideProgress();
+                    Intent i = new Intent(ProfessorListActivity.this,SearchActivity.class);
+                    startActivity(i);
+                }
+                else {
+                    hideProgress();
+                    Professorlistadapter.setProfessorsArrayList(list);
+
+                }
+            }};
         showProgress();
         if(str.equals("0")){
             db.fetchoneprofessors(intent.getStringExtra("name"), new OnObjectFetchListener() {
@@ -56,38 +71,10 @@ public class ProfessorListActivity extends BaseActivity {
             });
         }
         else if(str.equals("2")){
-            db.fetchoninterest(intent.getStringExtra("interest"), new OnObjectListFetchListener() {
-                @Override
-                public void onListChanged(ArrayList list, boolean isEmpty) {
-                    if (isEmpty){
-                        hideProgress();
-                        Intent i = new Intent(ProfessorListActivity.this,SearchActivity.class);
-                        startActivity(i);
-                    }
-                    else {
-                        hideProgress();
-                        Professorlistadapter.setProfessorsArrayList(list);
-
-                    }
-                }
-            });
+            db.fetchoninterest(intent.getStringExtra("interest"), ob);
         }
         else{
-            db.fetchallprofessors(new OnObjectListFetchListener() {
-                @Override
-                public void onListChanged(ArrayList list, boolean isEmpty) {
-                    if (isEmpty){
-                        hideProgress();
-                        Intent i = new Intent(ProfessorListActivity.this,SearchActivity.class);
-                        startActivity(i);
-                    }
-                    else {
-                        hideProgress();
-                        Professorlistadapter.setProfessorsArrayList(list);
-
-                    }
-                }
-            });
+            db.fetchallprofessors(ob);
         }
 
     }

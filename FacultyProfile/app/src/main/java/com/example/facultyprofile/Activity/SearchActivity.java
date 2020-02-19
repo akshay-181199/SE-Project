@@ -25,16 +25,19 @@ public class SearchActivity extends BaseActivity {
     String[] names ={"Anisha Radhakrishnan","Anupa Vijai","Archanaa rajendran","Bagavathi Sivakumar P.","Baskar A","Bindu K R","C.Arunkumar","D Venkataraman","Dhanya M Dhanalakshmy","Dhanya N.M.","Dr. Senthilkumar Mathi","GOVINDARAJAN JAYAPRAKASH","Ganesh Neelakanta Iyer","Gowtham Ramesh","Jevitha KP","Jeyakumar","Latha Parameswaran","M Sethumadhavan","M.Prathilothamai","Malathi P","N Harini","N Radhika","Padmavathi S","Prakash Periyasamy","Prashant R. Nair","Priyanka Kumar","RR sathiya","Raghesh Krishnan K","Rajathilagam B","Ramya gr","Ritwik Murali","Saba Rish","Senthilkumar Thangavel","Shanmuga Priya S","Shriram K Vasudevan","Shunmuga Velayutham","Sikha o.k","Sini Raj Pulari","Swapna T R","Vamsee Krishna Kiran M","Vidhya Balasubramanian","gayathri v"};
     String[] interests={"Evolutionary computing", "Image Processing", "Computer Vision", "Nature Inspired Algorithms", "Machine learning", "Predictive Analytics", "IoT", "Time Series Analysis and Forecasting", "Machine Learning & Pattern Recognition", "Artificial intelligence", "Internet of things", "Information Retreival", "Machine Learning", "Bioinformatics", "Neural Networks", "Image processing", "Differential Evolution", "Next Generation IP Mobility", "Vehicular Networks", "Internet of Things", "Information Security", "Wireless Networks", "Cloud Computing", "Game Theory", "Software Engineering", "Edge Computing", "Web Security", "Information Retrieval", "Semantic Web", "Web and Mobile Application Security", "Formal methods", "Evolutionary Computing", "Parallel and Distributed Models of Evolutionary Algorithm.", "Multimedia security", "Information retrieval", "Cryptography", "Boolean Functions", "Multimedia Security", "Paring Based Cryptography", "Big Data", "Image Steganography", "cryptography and security", "materials", "Image analysis", "Pattern recognition", "Data structures", "Computer graphics", "Application of IT tools for Supply Chain Management", "Management Information Systems", "Electronic Business", "Cyber Security", "Parallel and Distributed System", "Blockchain Technology", "Data mining", "Bigdata", "cloud computing", "Biomedical Image Analysis", "Compiler Design", "Computer Programming (in 'C')", "Formal Languages and Automata", "Signal Processing", "Predictive Analytics and Machine Learning", "Malware Analysis", "Threat Modeling", "Privacy Preservation (Vulnerability Analysis) on Social Networks", "Botnets", "Data Mining", "Trajectory mining", "WSN", "Video Processing", "Cloud computing", "Big Data Analytics", "Networking", "Embedded Systems", "Operating Systems", "Evolutionary Computation", "Computer Science Education", "image processing", "parellel computing", "Reccomender Systems", "Natural Language Processing", "Computational Intelligence and Medical Imaging","Recommender systems", "Cloud-IaaS", "Pervasive Systems", "Cyber-physical systems", "Distributed Systems"};
 
-    ArrayAdapter<String> adapter,adapter1,adapter2;
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter1;
+    ArrayAdapter<String> adapter2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(getApplicationContext());
 
-        adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_selectable_list_item,names);
-        adapter1 = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_selectable_list_item,dept);
-        adapter2 = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_selectable_list_item,interests);
+        adapter = new ArrayAdapter<>(SearchActivity.this,android.R.layout.simple_selectable_list_item,names);
+        adapter1 = new ArrayAdapter<>(SearchActivity.this,android.R.layout.simple_selectable_list_item,dept);
+        adapter2 = new ArrayAdapter<>(SearchActivity.this,android.R.layout.simple_selectable_list_item,interests);
 
         univ= findViewById(R.id.UNIVERSITYNAME);
         dep= findViewById(R.id.DEPARTMENT);
@@ -76,10 +79,10 @@ public class SearchActivity extends BaseActivity {
             }
         });
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> ada = ArrayAdapter.createFromResource(this,
                 R.array.course, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s1.setAdapter(adapter);
+        ada.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s1.setAdapter(ada);
         s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
