@@ -1,5 +1,10 @@
 package com.example.facultyprofile;
 
+import android.widget.EditText;
+
+import com.example.facultyprofile.Activity.ProfileActivity;
+import com.example.facultyprofile.Activity.SearchActivity;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,7 +16,23 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void validationtest_searchactivityforstrings() {
+        SearchActivity s=new SearchActivity();
+        assertTrue(s.validateallstring("Sanjay"));
+    }
+    @Test
+    public void validationtestfalse_searchactivityforstrings() {
+        SearchActivity s=new SearchActivity();
+        assertFalse(s.validateallstring("Sanjay123"));
+    }
+    @Test
+    public void validationtest_searchactivityfornumbers() {
+        ProfileActivity p = new ProfileActivity();
+        assertTrue(p.validateallnumber("1"));
+    }
+    @Test
+    public void validationtestfalse_searchactivityfornumbers() {
+        ProfileActivity p = new ProfileActivity();
+        assertFalse(p.validateallnumber("abc"));
     }
 }

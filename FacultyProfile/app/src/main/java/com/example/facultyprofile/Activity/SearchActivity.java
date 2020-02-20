@@ -122,7 +122,7 @@ public class SearchActivity extends BaseActivity {
                         Toast.makeText(SearchActivity.this,"Please Enter Some Value",Toast.LENGTH_LONG).show();
                     }
                     else if(dep.getText().toString().matches("")&&interest.getText().toString().matches("")){
-                        if(Arrays.asList(names).contains(name.getText().toString())){
+                        if(Arrays.asList(names).contains(name.getText().toString())&&validateallstring(name.getText().toString())){
                         Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
                         intent.putExtra("flag","0");
                         intent.putExtra("name",name.getText().toString());
@@ -133,7 +133,7 @@ public class SearchActivity extends BaseActivity {
                         }
                     }
                     else if(name.getText().toString().matches("")&&dep.getText().toString().matches("")){
-                        if(Arrays.asList(interests).contains(interest.getText().toString())){
+                        if(Arrays.asList(interests).contains(interest.getText().toString())&&validateallstring(interest.getText().toString())){
                             Intent intent = new Intent(SearchActivity.this,ProfessorListActivity.class);
                             intent.putExtra("flag","2");
                             intent.putExtra("interest",interest.getText().toString());
@@ -168,6 +168,9 @@ public class SearchActivity extends BaseActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+    public boolean validateallstring(String name){
+        return name.matches("^[ a-zA-Z.]+$");
     }
 
 }

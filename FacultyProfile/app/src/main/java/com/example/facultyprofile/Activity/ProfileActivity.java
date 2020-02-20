@@ -109,8 +109,13 @@ public class ProfileActivity extends BaseActivity {
                 });
         name.setText(professors.getname());
         hindex.setText(Integer.toString(professors.getHindex()));
+        Boolean b=validateallnumber(Integer.toString(professors.getHindex()));
         i10index.setText(Integer.toString(professors.getI10index()));
         cites.setText(Integer.toString(professors.getCitedby()));
+    }
+
+    public boolean validateallnumber(String name){
+        return name.matches("^[0-9]+$");
     }
 
     @Override
