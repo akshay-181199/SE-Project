@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.justpinch.androidanalyzer'
+apply plugin:'base'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"

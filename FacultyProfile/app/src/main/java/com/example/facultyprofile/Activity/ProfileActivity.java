@@ -2,6 +2,7 @@ package com.example.facultyprofile.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -113,6 +114,7 @@ public class ProfileActivity extends BaseActivity {
         i10index.setText(Integer.toString(professors.getI10index()));
         cites.setText(Integer.toString(professors.getCitedby()));
     }
+
 
     public boolean validateallnumber(String name){
         return name.matches("^[0-9]+$");
