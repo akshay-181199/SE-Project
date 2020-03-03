@@ -1,6 +1,5 @@
 package com.example.facultyprofile;
 
-import android.widget.EditText;
 
 import com.example.facultyprofile.Activity.ProfileActivity;
 import com.example.facultyprofile.Activity.SearchActivity;
