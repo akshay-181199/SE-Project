@@ -2,6 +2,7 @@ package com.example.facultyprofile.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,7 +44,7 @@ public class ProfessorListActivity extends BaseActivity {
         professorrecylerview.setHasFixedSize(true);
         professorrecylerview.setLayoutManager(layoutManager);
 
-        OnObjectListFetchListener ob = new OnObjectListFetchListener() {
+        final OnObjectListFetchListener ob = new OnObjectListFetchListener() {
             @Override
             public void onListChanged(ArrayList list, boolean isEmpty) {
                 if (isEmpty){
@@ -65,7 +66,7 @@ public class ProfessorListActivity extends BaseActivity {
                     hideProgress();
                     Intent intent2 = new Intent(ProfessorListActivity.this,ProfileActivity.class);
                     intent2.putExtra("Obj", (Professors)object);
-
+                    Log.e("hello",((Professors) object).getname());
                     startActivity(intent2);
                 }
             });
