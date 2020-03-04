@@ -1,5 +1,6 @@
 package com.example.facultyprofile.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,12 @@ public class professorlistadapter extends RecyclerView.Adapter<professorlistview
 
     private ArrayList<Professors> professorsArrayList=new ArrayList<>();
     private Context context;
+    private Activity activity;
     private CallBack callBack;
 
-    public professorlistadapter(Context context){
+    public professorlistadapter(Context context, Activity activity){
         this.context=context;
+        this.activity=activity;
     }
 
     public void setCallBack(CallBack callBack){
@@ -36,7 +39,7 @@ public class professorlistadapter extends RecyclerView.Adapter<professorlistview
     public professorlistviewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater=LayoutInflater.from(viewGroup.getContext());
         View view=layoutInflater.inflate(R.layout.professors_list,viewGroup,false);
-        return new professorlistviewholder(view,callBack,context);
+        return new professorlistviewholder(view,callBack,context,activity);
     }
 
     @Override
