@@ -48,22 +48,22 @@ public class ProfessorListActivity extends BaseActivity {
             @Override
             public void onListChanged(ArrayList list, boolean isEmpty) {
                 if (isEmpty){
-                    hideProgress();
+                    cancelLoading();
                     Intent i = new Intent(ProfessorListActivity.this,SearchActivity.class);
                     startActivity(i);
                 }
                 else {
-                    hideProgress();
+                    cancelLoading();
                     Professorlistadapter.setProfessorsArrayList(list);
 
                 }
             }};
-        showProgress();
+        showLoadingDialog();
         if(str.equals("0")){
             db.fetchoneprofessors(intent.getStringExtra("name"), new OnObjectFetchListener() {
                 @Override
                 public void onDataFetched(Object object) {
-                    hideProgress();
+                    cancelLoading();
                     Intent intent2 = new Intent(ProfessorListActivity.this,ProfileActivity.class);
                     intent2.putExtra("Obj", (Professors)object);
                     Log.e("hello",((Professors) object).getname());

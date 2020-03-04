@@ -77,9 +77,9 @@ public class BaseActivity extends AppCompatActivity {
 
 
 
-    public void showLoadingDialog(Context context) {
+    public void showLoadingDialog() {
         if (!(progressBarDialog != null && progressBarDialog.isShowing())) {
-            progressBarDialog = new Dialog(context);
+            progressBarDialog = new Dialog(this);
             progressBarDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             progressBarDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             progressBarDialog.setContentView(R.layout.progress_bar_dialog);
