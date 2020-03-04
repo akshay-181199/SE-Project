@@ -29,7 +29,7 @@ public class ProfessorListActivity extends BaseActivity {
         String str = intent.getStringExtra("flag");
         setContentView(R.layout.professors_show_list);
         professorrecylerview = findViewById(R.id.professorlistRecyclerView);
-        Professorlistadapter = new professorlistadapter(this);
+        Professorlistadapter = new professorlistadapter(this,this);
         Professorlistadapter.setCallBack(new professorlistadapter.CallBack() {
             @Override
             public void onItemClick(int position, View view) {

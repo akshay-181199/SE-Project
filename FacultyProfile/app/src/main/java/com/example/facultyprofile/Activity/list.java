@@ -41,10 +41,9 @@ public class list extends BaseActivity {
         userlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),userlist.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
                 databasehelper db1;
                 db1=new databasehelper();
-                showLoadingDialog(getApplicationContext());
+                showLoadingDialog();
                 db1.fetchoneprofessors(userlist.getItemAtPosition(position).toString(), new OnObjectFetchListener() {
                     @Override
                     public void onDataFetched(Object object) {
