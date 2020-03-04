@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.ProfileActivity"></activity>
+        <activity android:name=".Activity.list"></activity>
+        <activity android:name=".Activity.ProfileActivity" />
         <activity android:name=".Activity.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +29,7 @@ public class ProfessorListActivity extends BaseActivity {
         String str = intent.getStringExtra("flag");
         setContentView(R.layout.professors_show_list);
         professorrecylerview = findViewById(R.id.professorlistRecyclerView);
-        Professorlistadapter = new professorlistadapter(this);
+        Professorlistadapter = new professorlistadapter(this,this);
         Professorlistadapter.setCallBack(new professorlistadapter.CallBack() {
             @Override
             public void onItemClick(int position, View view) {
@@ -47,22 +48,22 @@ public class ProfessorListActivity extends BaseActivity {
             @Override
             public void onListChanged(ArrayList list, boolean isEmpty) {
                 if (isEmpty){
-                    hideProgress();
+                    cancelLoading();
                     Intent i = new Intent(ProfessorListActivity.this,SearchActivity.class);
                     startActivity(i);
                 }
                 else {
-                    hideProgress();
+                    cancelLoading();
                     Professorlistadapter.setProfessorsArrayList(list);
 
                 }
             }};
-        showProgress();
+        showLoadingDialog(getApplicationContext());
         if(str.equals("0")){
             db.fetchoneprofessors(intent.getStringExtra("name"), new OnObjectFetchListener() {
                 @Override
                 public void onDataFetched(Object object) {
-                    hideProgress();
+                    cancelLoading();
                     Intent intent2 = new Intent(ProfessorListActivity.this,ProfileActivity.class);
                     intent2.putExtra("Obj", (Professors)object);
 
