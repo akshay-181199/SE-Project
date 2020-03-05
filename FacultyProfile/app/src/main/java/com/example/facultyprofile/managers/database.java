@@ -73,6 +73,7 @@ public class database extends SQLiteOpenHelper {
         // cursor.getInt(0) is 1 if column with value exists
         if (cursor.getInt(0) == 1) {
             cursor.close();
+            Log.d("Hello",name1);
             return true;
         } else {
             cursor.close();

@@ -55,6 +55,15 @@ public class list extends BaseActivity {
                 });
             }
         });
+        userlist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                showWarningDialog("DO you wawnt to remove item from bookmark",userlist.getItemAtPosition(position).toString());
+
+                return true;
+            }
+        });
     }
 
     private void viewData() {
@@ -72,5 +81,11 @@ public class list extends BaseActivity {
             userlist.setAdapter(adapter);
         }
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(list.this,SearchActivity.class);
+        startActivity(intent);
+    }
+
 
 }

@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.facultyprofile.R;
+import com.example.facultyprofile.managers.database;
 import com.google.android.material.snackbar.Snackbar;
 
 
@@ -110,10 +113,22 @@ public class BaseActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void showWarningDialog(String message) {
+    public void showWarningDialog(String message, final String name) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
-        builder.setPositiveButton(R.string.button_ok, null);
+        builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                database db;
+                db=new database(BaseActivity.this);
+                db.delete(name);
+                Intent i = new Intent(BaseActivity.this,list.class);
+                startActivity(i);
+            }
+        });
+        builder.setNegativeButton("CANCEL",null);
         builder.show();
     }
 

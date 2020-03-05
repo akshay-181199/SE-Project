@@ -2,6 +2,8 @@ package com.example.facultyprofile.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,7 @@ import com.example.facultyprofile.Adapters.publicationlistadapter;
 import com.example.facultyprofile.Models.Professors;
 import com.example.facultyprofile.Models.Publications;
 import com.example.facultyprofile.R;
+import com.example.facultyprofile.managers.database;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -31,6 +34,7 @@ public class ProfileActivity extends BaseActivity {
     TextView name,hindex,i10index,cites;
     Spinner s1;
     ProgressBar progressBar;
+    database db;
 
 
     @Override
@@ -123,6 +127,46 @@ public class ProfileActivity extends BaseActivity {
     public void onBackPressed() {
         Intent intent = new Intent(ProfileActivity.this,SearchActivity.class);
         startActivity(intent);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+
+        db=new database(ProfileActivity.this);
+        if(db.check(professors.getname()))
+        {
+            getMenuInflater().inflate(R.menu.listmenub, menu);
+
+        }
+        else
+            getMenuInflater().inflate(R.menu.listmenu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.item4:
+                if(db.check(professors.getname()))
+                {
+                    db.delete(professors.getname());
+                    Intent i = new Intent(ProfileActivity.this,ProfileActivity.class);
+                    i.putExtra("Obj", professors);
+                    startActivity(i);
+                }
+                else {
+                    db.addName(professors.getname());
+                    Intent i = new Intent(ProfileActivity.this, ProfileActivity.class);
+                    i.putExtra("Obj", professors);
+                    startActivity(i);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

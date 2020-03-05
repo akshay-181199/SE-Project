@@ -57,13 +57,30 @@ public class professorlistviewholder extends RecyclerView.ViewHolder {
         });
 
 
-        tg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//        tg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked)
+//                {
+//
+//                    Log.d("myApp", "Islogged");
+//                    db.addName(professorname.getText().toString());
+//                    db.select();
+//                }
+//                else
+//                {
+//                    Log.d("myApp", "remove");
+//                    db.delete(professorname.getText().toString());
+//                }
+//
+//            }
+//        });
+        tg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
+            public void onClick(View v)
+            {
+                if(tg.isChecked())
                 {
-
-                    Log.d("myApp", "Islogged");
                     db.addName(professorname.getText().toString());
                     db.select();
                 }
@@ -72,7 +89,6 @@ public class professorlistviewholder extends RecyclerView.ViewHolder {
                     Log.d("myApp", "remove");
                     db.delete(professorname.getText().toString());
                 }
-
             }
         });
 
@@ -85,6 +101,8 @@ public class professorlistviewholder extends RecyclerView.ViewHolder {
         if(db.check(professorname.getText().toString())){
             tg.setChecked(true);
         }
+        else
+            tg.setChecked(false);
         setImageOfUser(professors.getUrl_picture());
     }
 
