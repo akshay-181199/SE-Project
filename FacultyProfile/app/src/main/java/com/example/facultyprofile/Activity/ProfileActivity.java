@@ -35,6 +35,7 @@ public class ProfileActivity extends BaseActivity {
     Spinner s1;
     ProgressBar progressBar;
     database db;
+    Menu m;
 
 
     @Override
@@ -44,6 +45,7 @@ public class ProfileActivity extends BaseActivity {
         progressBar=findViewById(R.id.progressofimage);
         progressBar.setVisibility(View.VISIBLE);
         s1=findViewById(R.id.selection);
+        db=new database(this);
         professors= (Professors) getIntent().getSerializableExtra("Obj");
         publicationrecyclerview = findViewById(R.id.publicationslistview);
         Publicationlistadapter = new publicationlistadapter(this);
@@ -131,39 +133,39 @@ public class ProfileActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
-
-        db=new database(ProfileActivity.this);
-        if(db.check(professors.getname()))
-        {
-            getMenuInflater().inflate(R.menu.listmenub, menu);
+        getMenuInflater().inflate(R.menu.listmenu, menu);
+        m=menu;
+        MenuItem item4 = m.findItem(R.id.item4);
+        MenuItem item5 = m.findItem(R.id.item5);
+        if(db.check(professors.getname())){
+            item4.setVisible(false);
+            item5.setVisible(true);
+        }
+        else {
+            item5.setVisible(false);
+            item4.setVisible(true);
 
         }
-        else
-            getMenuInflater().inflate(R.menu.listmenu, menu);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        MenuItem item4 = m.findItem(R.id.item4);
+        MenuItem item5 = m.findItem(R.id.item5);
         switch (id){
             case R.id.item4:
-                if(db.check(professors.getname()))
-                {
-                    db.delete(professors.getname());
-                    Intent i = new Intent(ProfileActivity.this,ProfileActivity.class);
-                    i.putExtra("Obj", professors);
-                    startActivity(i);
-                }
-                else {
-                    db.addName(professors.getname());
-                    Intent i = new Intent(ProfileActivity.this, ProfileActivity.class);
-                    i.putExtra("Obj", professors);
-                    startActivity(i);
-                }
+                db.addName(professors.getname());
+                item4.setVisible(false);
+                item5.setVisible(true);
                 return true;
+            case R.id.item5:
+                db.delete(professors.getname());
+                item5.setVisible(false);
+                item4.setVisible(true);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
